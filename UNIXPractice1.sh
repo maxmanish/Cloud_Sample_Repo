@@ -1,4 +1,4 @@
-# 19-Apr-26 (Day #1)
+# 19-Apr-26 (Day #1 WC HEAD TAIL SORT)
 # Write a UNIX command to display the total number of records (rows) present in orders.csv
 wc -l orders.csv
 
@@ -29,3 +29,7 @@ sort orders.csv | uniq -d
 
 # Write a UNIX command to display only unique rows from orders.csv
 sort orders.csv | uniq
+
+#some more questions/solutions
+awk -F',' '{print $2}' orders.csv | sort | uniq | wc -l
+awk -F',' '{print $2}' orders.csv | sort | uniq -d
