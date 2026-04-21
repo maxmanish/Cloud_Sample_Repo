@@ -13,7 +13,11 @@ cut -d',' -f2-4 orders.csv
 awk -F',' '{print $2, $3, $4}' orders.csv #bonus solution
 
 # Write a cut command to display only the first 3 characters of the customer_id column from orders.csv
-cut -d',' -f2 orders.csv | cut -c1-3 # c - character based cut
+cut -d',' -f2 orders.csv | cut -c1-3 # c - character based cut (first 3 chars)
+cut -d',' -fN file | cut -cX-Y #General syntax
+
+# Write a cut command to display only the 1st and 2nd columns from orders.csv
+cut -d',' -f1,2 orders.csv
 
 
 # AWK [AWK programs are a sequence of pattern–action rules e.g. conditional logic, calculations]
