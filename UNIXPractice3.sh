@@ -3,15 +3,17 @@
 diff orders_day1.csv orders_day2.csv
 
 # More diff commands [diff is row-by-row/line-by-line comparison]
-diff -i orders_day1.csv orders_day2.csv #ignore case
-diff -y orders_day1.csv orders_day2.csv #side by side comparison
-diff -u file1 file2 #unified format
-sort file1.csv | diff - file2.csv #sort the first file then compare with second file
-diff -w -i file1 file2 #ignore whitespaces, ignore case
+diff -i orders_day1.csv orders_day2.csv #i-ignore case
+diff -y orders_day1.csv orders_day2.csv #y-side by side comparison
+diff -u file1 file2 #u-unified format
+sort file1.csv | diff - file2.csv #sort the file1 then compare with file2
+sort file1.csv > a
+sort file2.csv > b
+diff -w -i a b #w-ignore whitespaces. i-ignore case
 
-
+# CHMOD [Change Mode]
 # Write a UNIX command to give/add execute permission to the owner of run_etl.sh
-chmod u+x run_etl.sh #symbolic mode [who:u,g,o,a][operation:+,-,=][permission:r,w,x]
+chmod u+x run_etl.sh #symbolic mode [who:u-user,g-group,o-owner,a-all][operation:+,-,=][permission:r,w,x]
 
 # More chmod commands [octal and symbolic]
 chmod 755 run_etl.sh #user-7(rwx);group-5(r-x);other-5(r-x) [octal mode]
@@ -19,9 +21,9 @@ chmod 600 secrets.conf #owner read/write, others no access
 chmod o-w orders.csv #remove write permission from other
 chmod g+r orders.csv #give read permission to group
 chmod a+r data.csv #give read permission to all
-chmod u=rwx,g=rx,o=r run_daily_job.sh #set ugo=754 permission
+chmod u=rwx,g=rx,o=r run_daily_job.sh #set ugo=754 permission using symbolic mode
 
-
+# PS [Process Status]
 # Write a UNIX command to display all running processes in full detail
 ps -ef # ps-process status. e-shows all running processes. f-full format
 UID     PID   PPID  C STIME TTY   TIME     CMD
@@ -31,22 +33,22 @@ etl     2345  1020  0 10:15 ?     00:02:30 ./run_etl.sh
 ps -ef | grep load_orders.sh
 ps -ef | grep load_orders.sh | grep -v grep #remove the grep command itself from appearing in the output
 
-
+# DF and DU [Disk freespace and Disk Usage]
 # Write a UNIX command to display disk space usage/available on the filesystem in a human‑readable format
 df -h #h-human‑readable format (filesystem level)
 
 # More df commands
-df -h /data #check space for a specific directory. h-human‑readable format
+df -h /data #only show information for the filesystem where /data is located. h-human‑readable format
 df -hT # T-filesystem type
 
 
 # Write a UNIX command to display disk usage of directory/files in the current location in a human‑readable format
 du -h #h-human‑readable format (folder/file usage level) (files/directories/sub-directories in current directory)
 du -sh #h-human‑readable format. s-summary only (files/directories in current directory)
-du -sh staging #disk usage of a single directory
-du -sh * | sort -h #sort directories by size
+du -sh staging #disk usage of a single directory (relative path to current working directory)
+du -sh * | sort -h #s-summary. h-sort directories by size
 
-
+# KILL Command
 # Write a UNIX command to terminate a running process with PID 4567 gracefully
 kill 4567 #gracefully (Allows the process to: close files, release resources, Write logs)
 kill -9 4567 #forcefully/immediate process termination
@@ -55,7 +57,7 @@ kill -9 4567 #forcefully/immediate process termination
 ps -ef | grep load_orders.sh
 kill <PID>
 
-
+# FIND Command
 # Write a UNIX command to find all .log files in the current directory and its subdirectories
 find . -name "*.log" # find-find files with name, recursively. dot-start searching from current directory
 
@@ -74,7 +76,7 @@ find . -type f -perm 777
 
 # Write a UNIX command to move orders.csv into the archive directory
 mv orders.csv archive/ #path is relative to current directory
-mv orders.csv ./archive/ #path is relative (explicitely) to current directory
+mv orders.csv ./archive/ #path is relative (explicitely mentioned) to current directory
 mv orders.csv .archive/ #path is relative to current directory, however, [.archive] is a hidden directory
 
 # More use cases of mv [with options]
@@ -90,7 +92,7 @@ mv -n orders.csv archive/ #n-prevents overwriting, file is skipped if already ex
 
 # Write a UNIX command to delete the file orders.tmp
 rm orders.tmp #permanent delete, no recycle bin
-rm -i orders.tmp #i-asks for confirmation before deletion
+rm -i orders.tmp #i-prompt/asks for confirmation before deletion
 
 # More use cases of rm [with options]
 rm -r temp_dir #r-removes directory and all it's contents recursively
@@ -102,6 +104,7 @@ rm staging/*.tmp #removing files (with tmp extension) inside a folder using wild
 rm dir/* #remove files inside a directory (keeps directory intact)
 rm -rfi temp_dir #when both -i and -f are used, -i takes precedence over -f (will ask for confirmation)
 
+# CP [COPY]
 # Write a UNIX command to create a backup copy of orders.csv as orders_backup.csv
 cp orders.csv orders_backup.csv #original file remains unchanged
 

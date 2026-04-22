@@ -17,18 +17,6 @@ tail -f etl.log #f-follow file live updates in realtime
 head -20 orders.csv | tail -10 #print line 11 to 20
 
 
-# Write a UNIX command to display all rows that contain the string CUST1005
-grep CUST1005 orders.csv
-
-# Write a UNIX command to display the content of orders.csv with commas replaced by |
-cat orders.csv | tr ',' '|'
-sed 's/,/|/g' orders.csv #sed is a Stream EDitor (SED). Processes text line by line. s-substitute
-
-# Count the number of lines that contain NULL in orders.csv
-grep -c NULL orders.csv
-grep NULL orders.csv | wc -l
-
-
 # SORT
 # Write a UNIX command to display only duplicate rows from orders.csv
 sort orders.csv | uniq -d
@@ -42,3 +30,14 @@ sort -u customers.txt #u-unique. sort and remove duplicates [same as sort custom
 sort -n amounts.txt #n-numeric sort (use n for sorting numbers)
 sort -k2 orders.csv #sort be specific column. k-sort by column#2
 sort -t',' -k2 orders.csv #t-sort with custom delimeter (e.g. comma)
+
+# Write a UNIX command to display all rows that contain the string CUST1005
+grep CUST1005 orders.csv
+
+# Write a UNIX command to display the content of orders.csv with commas replaced by |
+cat orders.csv | tr ',' '|'
+sed 's/,/|/g' orders.csv #sed is a Stream EDitor (SED). Processes text line by line. s-substitute
+
+# Count the number of lines that contain NULL in orders.csv
+grep -c NULL orders.csv
+grep NULL orders.csv | wc -l
