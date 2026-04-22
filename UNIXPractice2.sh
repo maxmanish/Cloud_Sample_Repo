@@ -54,6 +54,11 @@ awk -F',' '{sum+=$4}; END{print sum}' orders.csv #both commands are correct
 # Write an awk command to print each customer_id along with the count of orders for that customer
 awk -F',' '{count[$2]++} END {for (c in count) print c, count[c]}' orders.csv
 
+# Write a UNIX command to count the number of distinct customer IDs
+awk -F',' '{print $2}' orders.csv | sort | uniq | wc -l #sorting needed first because uniq only works on adjacent lines
+awk -F',' '{print $2}' | sort -u | wc -l #u-sort and keep only unique (in one command). count of unique values
+awk -F',' '{print $2}' orders.csv | sort | uniq -d #display only duplicates in column #2
+
 
 # GREP [Global Regular Expression Print]
 # You received a data file orders.csv. During validation, you want to find all records related to customer CUST1005
